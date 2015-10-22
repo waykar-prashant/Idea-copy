@@ -1,0 +1,15 @@
+{
+	table: "thermostatTmp"
+	, function: "find"
+	, where: [
+		{
+			field: "name"
+			, equal: "$LOCATION$"
+		}
+
+	]
+	, select: ["name", "deviceTime", "temp", "tstate", "t_heat" ]
+	, sort: [{field: "deviceTime", order: "ASC"}]
+}
+
+

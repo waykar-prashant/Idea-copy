@@ -1,0 +1,22 @@
+//{ "_id" : ObjectId("5583400530045fdeb6547ee7"), "avgScore" : 70.05555555555556, "avgTechScore" : 78.5, "avgFundScore" : 62.05555555555556, "inTopTen" : 18, "range" : "100 Day", "symbol" : "AHS" }
+
+{
+collection: 'ScreenList'
+, query: [
+	{ $match: {
+		date:"$_TODAY_$"
+	} }
+	, {$sort: {"totalScore":-1} }
+	, {$project: {
+		_id:0
+               , screenName:1
+               , techScore:1
+               , fundScore:1
+               , totalScore:1
+               , numberofEquities:1
+               , date:1
+	}}
+]
+}
+
+

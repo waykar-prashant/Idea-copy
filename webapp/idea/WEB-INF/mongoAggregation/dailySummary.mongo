@@ -1,0 +1,34 @@
+
+{
+collection: 'thermostatTmp'
+, query: [
+	{ $match: {
+		tmode: {$gte: 0}
+		, name:"$_NAME_$"
+	} }
+	, { $group: {
+		_id: {name:"$name", day:{$dayOfMonth:"$measureTime"}, month:{$month:"$measureTime"}, year:{$year:"$measureTime"}  }
+		, numberOn: {$sum:"$tstate"}
+		, goodRecords: {$sum:1}
+		, avgTemperature: {$avg:"$temp"}
+		, maxTemperature: {$max:"$temp"}
+		, minTemperature: {$min:"$temp"}
+	} }
+	, {$sort: {"_id.year":1, "_id.month":1, "_id.day":1} }
+	, {$project: {
+		_id:0
+		, name:"$_id.name"
+		, day: "$_id.day"
+		, month: "$_id.month"
+		, year: "$_id.year"
+		, numberOn: "$numberOn"
+		, goodRecords: "$goodRecords"
+		, percentOn: {$multiply: [{$divide: ["$numberOn", "$goodRecords"] }, 100] }
+		, timeRunning: {$multiply: ["$numberOn", 10] }
+		, averageTemperature: "$avgTemperature"
+		, maxTemperature: "$maxTemperature"
+		, minTemperature: "$minTemperature"
+	}}
+]
+}
+

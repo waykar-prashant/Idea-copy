@@ -1,0 +1,13 @@
+{
+	table: "TopScreenScore"
+	, function: "find"
+	, where: [
+		{
+			field: "range"
+			, equal: "$RANGE$"
+		}
+
+	]
+	, sort: [{field: "avgScore", order: "DESC"}]
+}
+

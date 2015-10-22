@@ -1,0 +1,13 @@
+{
+	table: "ScreenList"
+	, function: "find"
+	, where: [
+		{
+			field: "date"
+			, type: "date"
+			, equal: "_CURRENT_DATE_"
+		}
+	]
+	, sort: [{field: "totalScore", order: "DESC"}]
+}
+

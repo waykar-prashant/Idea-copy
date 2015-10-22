@@ -1,0 +1,23 @@
+
+{
+collection: 'historyElement'
+, query: [
+	{ $match: {
+		symbol:"$_SYMBOL_$"
+		//, date: { "$gt": "$_YTD_$" }
+	} }
+	, {$sort: {"date":1} }
+	, {$project: {
+		_id:0
+               	, symbol: 1
+               	, date: {$substr: ["$date",0,10]}
+               	, open: 1
+               	, close: 1
+               	, high: 1
+               	, low: 1
+               	, volume: 1
+               	, lastUpdated: 1
+	}}
+]
+}
+

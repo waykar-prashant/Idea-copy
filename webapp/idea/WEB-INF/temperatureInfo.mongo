@@ -1,0 +1,61 @@
+
+
+
+var today = new Date();
+today.setMinutes(0,0,0);
+today.setHours(0);
+print("Date:"+today);
+
+var result = db.thermostatTmp.aggregate([
+	{ $match: {
+		measureTime:{$gte: today}
+		, tmode: {$gte: 0}
+	} }
+	, { $group: {
+		_id: "$name"
+		, numberOn: {$sum:"$tstate"}
+		, goodRecords: {$sum:1}
+		, avgTemperature: {$avg:"$temp"}
+		, maxTemperature: {$max:"$temp"}
+		, minTemperature: {$min:"$temp"}
+	} }
+	, {$project: {
+		_id:0
+		, name:"$_id"
+		, numberOn: "$numberOn"
+		, goodRecords: "$goodRecords"
+		, percentOn: {$multiply: [{$divide: ["$numberOn", "$goodRecords"] }, 100] }
+		, timeRunning: {$multiply: ["$numberOn", 10] }
+		, averageTemperature: "$avgTemperature"
+		, maxTemperature: "$maxTemperature"
+		, minTemperature: "$minTemperature"
+	}}
+]
+);
+
+printjson(result);
+
+/*
+> db.thermostatTmp.findOne()
+{
+	"_id" : ObjectId("5425b664300414894068e3ed"),
+	"temp" : 77.5,
+	"tmode" : 1,
+	"fmode" : 0,
+	"override" : 0,
+	"hold" : 0,
+	"t_heat" : 60,
+	"tstate" : 0,
+	"fstate" : 0,
+	"time" : {
+		"day" : 4,
+		"hour" : 12,
+		"minute" : 53
+	},
+	"t_type_post" : 0,
+	"ipAddress" : "10.0.1.201",
+	"name" : "Upstairs",
+	"deviceTime" : ISODate("2014-09-26T18:54:28.161Z"),
+	"measureTime" : ISODate("2014-09-26T06:00:00Z")
+}
+*/

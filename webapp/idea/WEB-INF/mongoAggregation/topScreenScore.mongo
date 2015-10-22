@@ -1,0 +1,21 @@
+//{ "_id" : ObjectId("5583400530045fdeb6547ee7"), "avgScore" : 70.05555555555556, "avgTechScore" : 78.5, "avgFundScore" : 62.05555555555556, "inTopTen" : 18, "range" : "100 Day", "symbol" : "AHS" }
+
+{
+collection: 'TopScreenScore'
+, query: [
+	{ $match: {
+		range:"$_RANGE_$"
+	} }
+	, {$sort: {"avgScore":-1} }
+	, {$project: {
+		_id:0
+		, symbol:"$symbol"
+		, avgScore: {$divide:[ {$subtract:[ {$multiply:['$avgScore',1]}, {$mod:[{$multiply:['$avgScore',1]}, 1]} ]}, 1]}
+		, avgTechScore: {$divide:[ {$subtract:[ {$multiply:['$avgTechScore',1]}, {$mod:[{$multiply:['$avgTechScore',1]}, 1]} ]}, 1]}
+		, avgFundScore: {$divide:[ {$subtract:[ {$multiply:['$avgFundScore',1]}, {$mod:[{$multiply:['$avgFundScore',1]}, 1]} ]}, 1]}
+		, range: "$range"
+		, inTopTen: "$inTopTen"
+	}}
+]
+}
+

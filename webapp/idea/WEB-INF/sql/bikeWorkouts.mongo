@@ -1,0 +1,7 @@
+{
+	table: "rideWorkouts"
+	, function: "find"
+	, select: ["name", "date", "maxSpeed", "totalDistance", "totalTime","totalCalories","avgCadence"]
+	, sort: [{field: "date", order: "DESC"}]
+}
+

@@ -1,0 +1,15 @@
+{
+	table: "AnalysisElement"
+	, function: "find"
+	, where: [
+		{
+			field: "date"
+			, type: "date"
+			, equal: "_CURRENT_DATE_"
+		}
+	]
+	, select: [ "symbol", "techScore", "fundScore", "totalScore", "date" ]
+	, sort: [{field: "totalScore", order: "DESC"}]
+	, paging: {pageNum: 1, pageSize: 10}
+}
+

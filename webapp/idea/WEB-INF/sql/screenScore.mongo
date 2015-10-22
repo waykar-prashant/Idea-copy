@@ -1,0 +1,18 @@
+{
+	table: "ScreenScore"
+	, function: "find"
+	, where: [
+		{
+			field: "date"
+			, type: "date"
+			, equal: "_CURRENT_DATE_"
+		}
+		, {
+			field: "screenName"
+			, equal: "$SCREEN$"
+		}
+
+	]
+	, sort: [{field: "totalScore", order: "DESC"}]
+}
+

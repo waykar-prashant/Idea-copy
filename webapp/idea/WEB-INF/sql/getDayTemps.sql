@@ -1,0 +1,1 @@
+select (MINUTE(time)+HOUR(time)*60) as 'MOD', time, ipAddress, temp, setPoint  from EnergyManager.ThermoState where time>=DATE_SUB('$DATE$',INTERVAL 1 DAY) and time<DATE_SUB('$DATE$',INTERVAL 0 DAY) and time<=CURRENT_TIMESTAMP order by time asc
