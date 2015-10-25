@@ -1,4 +1,4 @@
-package com.idea.adapters.weather;
+package com.idea.adapters.weather.yahoo.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,6 +44,7 @@ public class YahooWeatherApiService {
 		writer.close();
 		is.close();
 		System.out.println(writer.toString());
+		
 		
 	}
 
