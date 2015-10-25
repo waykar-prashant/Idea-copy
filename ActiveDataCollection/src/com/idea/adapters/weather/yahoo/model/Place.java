@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
+@XmlRootElement(name="place")
 public class Place {
 
 	/*
@@ -39,9 +39,9 @@ public class Place {
 	@XmlElement
 	protected String postal;
 	@XmlElement
-	protected String centroid;
+	protected Centroid centroid;
 	@XmlElement
-	protected String boundingBox;
+	protected BoundingBox boundingBox;
 	@XmlElement
 	protected int areaRank;
 	@XmlElement
@@ -134,19 +134,20 @@ public class Place {
 		this.postal = postal;
 	}
 
-	public String getCentroid() {
+	
+	public Centroid getCentroid() {
 		return centroid;
 	}
 
-	public void setCentroid(String centroid) {
+	public void setCentroid(Centroid centroid) {
 		this.centroid = centroid;
 	}
 
-	public String getBoundingBox() {
+	public BoundingBox getBoundingBox() {
 		return boundingBox;
 	}
 
-	public void setBoundingBox(String boundingBox) {
+	public void setBoundingBox(BoundingBox boundingBox) {
 		this.boundingBox = boundingBox;
 	}
 

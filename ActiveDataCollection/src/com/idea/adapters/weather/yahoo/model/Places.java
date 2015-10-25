@@ -6,22 +6,24 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
+@XmlRootElement(name="places")
 public class Places {
 	
-	@XmlElement
-	protected String places;
+	@XmlElement(name="place")
+	protected Place place;
 	
 	public Places() {
 	}
 
-	public String getPlace() {
-		return places;
+	public Place getPlace() {
+		return place;
 	}
 
-	public void setPlace(String place) {
-		this.places = place;
+	public void setPlace(Place place) {
+		this.place = place;
 	}
+
+	
 	
 	
 }

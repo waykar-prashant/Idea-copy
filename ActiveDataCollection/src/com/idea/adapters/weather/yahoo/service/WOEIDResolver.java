@@ -43,6 +43,7 @@ public class WoeidResolver {
 		//copy(reader, writer);
 		writer.close();
 		is.close();
+		System.out.println(writer.toString());
 		XMLParser parser = new XMLParser();
 		Places places= parser.parser(writer.toString());
 		return places;

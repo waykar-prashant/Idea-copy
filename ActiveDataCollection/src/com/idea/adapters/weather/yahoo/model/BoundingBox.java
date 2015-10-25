@@ -6,32 +6,42 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
+@XmlRootElement(name="boundingBox")
 public class BoundingBox {
 	@XmlElement
-	private Coordinate southWest;
+	private SouthWest southWest;
 	
 	@XmlElement
-	private Coordinate northEast;
+	private NorthEast northEast;
 
 	public BoundingBox() {
 	}
 
-	public Coordinate getSouthWest() {
+	
+
+	public SouthWest getSouthWest() {
 		return southWest;
 	}
 
-	public void setSouthWest(Coordinate southWest) {
+
+
+	public void setSouthWest(SouthWest southWest) {
 		this.southWest = southWest;
 	}
 
-	public Coordinate getNorthEast() {
+
+
+	public NorthEast getNorthEast() {
 		return northEast;
 	}
 
-	public void setNorthEast(Coordinate northEast) {
+
+
+	public void setNorthEast(NorthEast northEast) {
 		this.northEast = northEast;
 	}
+
+
 
 	@Override
 	public String toString() {
