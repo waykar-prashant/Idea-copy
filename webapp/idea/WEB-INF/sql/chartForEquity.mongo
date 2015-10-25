@@ -1,0 +1,14 @@
+{
+	table: "historyElement"
+	, function: "find"
+	, where: [
+		{
+			field: "symbol"
+			, equal: "$SYMBOL$"
+		}
+
+	]
+	, select: ["symbol", "date", "open", "close", "high", "low", "volume" ]
+	, sort: [{field: "date", order: "ASC"}]
+}
+

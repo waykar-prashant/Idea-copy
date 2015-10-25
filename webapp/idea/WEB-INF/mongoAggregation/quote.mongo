@@ -1,0 +1,12 @@
+
+{
+collection: 'quote'
+, query: [
+	{ $match: {
+		symbol:"$_SYMBOL_$"
+	} }
+	, {$sort: {"LastQuoteDate":-1} }
+	, {$limit: 1}
+]
+}
+

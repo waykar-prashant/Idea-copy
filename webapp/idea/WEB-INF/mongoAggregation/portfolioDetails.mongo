@@ -1,0 +1,30 @@
+
+{
+collection: 'portfolioHoldings'
+, query: [
+	{ $match: {
+		owner:"$_OWNER_$"
+	} }
+	, {$project: {
+		_id:0
+              	, cost:1
+               	, gain:1
+               	, lastTrade:1
+               	, lastUpdated:1
+               	, owner:1
+               	, percent_gain:1
+               	, percent_potential:1
+               	, portfolioName:1
+               	, potential:1
+               	, purchaseDate:1
+               	, purchasePrice:1
+               	, quantity:1
+               	, symbol:1
+               	, name:1
+               	, todayGain:1
+               	, todayPercentGain:1
+	}}
+	, {$sort: {portfolioName:1,symbol:1} }
+]
+}
+

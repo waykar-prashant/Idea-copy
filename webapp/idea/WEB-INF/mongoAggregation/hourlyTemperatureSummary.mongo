@@ -1,0 +1,27 @@
+
+{
+collection: 'thermostatTmp'
+, query: [
+	{ $match: {
+		tmode: {$gte: 0}
+		, measureTime:{$gte: "$_TODAY_$" }
+		, name: "$_NAME_$"
+	} }
+	, { $group: {
+		_id: "$time.hour"
+		, numberOn: {$sum:"$tstate"}
+		//, goodRecords: {$sum:1}
+		, avgTemperature: {$avg:"$temp"}
+		//, maxTemperature: {$max:"$temp"}
+		//, minTemperature: {$min:"$temp"}
+	} }
+	, {$project: {
+		_id:0
+		, hourOfDay:"$_id"
+		, minutesRunning: {$multiply: ["$numberOn", 10] }
+		, avgTemperature: "$avgTemperature"
+	}}
+	, {$sort: {hourOfDay:1} }
+]
+}
+

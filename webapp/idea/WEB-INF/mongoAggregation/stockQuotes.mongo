@@ -1,0 +1,28 @@
+/*
+{ "_id" : ObjectId("54e60c943004a332e83cb957"), "symbol" : "VMW", "Name" : "Vmware,  Inc. Comm", "LastTrade" : 84.48, "Change" : -0.26, "PercentChange" : -0.31, "BookValue" : 17.657, "DividendPerShare" : 0, "DividendYield" : -999, "EPS" : 2.04, "EPSCurrentYr" : 4.01, "EPSNextYr" : 4.6, "EPSNextQtr" : 0.93, "AvgDailyVolume" : 1963300, "DaysLow" : 84.24, "DaysHigh" : 85.13, "52WeekLow" : 73.65, "52WeekHigh" : 112.89, "MktCap" : 36272, "Changefrom52WkLow" : 10.83, "PctChangefrom52WkLow" : 14.7, "Changefrom52WkHigh" : -28.41, "PctChangefrom52WkHigh" : -25.17, "Changefrom200DayMvAvg" : -3.3838, "PctChangefrom200DayMvAvg" : -3.85, "Changefrom50DayMvAvg" : 4.1694, "PctChangefrom50DayMvAvg" : 5.19, "PricePerSales" : 6.03, "PricePerBook" : 4.8, "PERatio" : 41.54, "PEGRatio" : 1.29, "ShortRatio" : 4.6, "TargetPrice1Yr" : 96.03, "Volume" : 189033, "HoldingsValue" : -999, "StockExchange" : "NYSE", "LastQuoteDate" : ISODate("2015-02-19T07:00:00Z") }
+*/
+
+{
+collection: 'quote'
+, query: [
+	{ $match: {
+		symbol:"$_SYMBOL_$"
+	} }
+/*
+	, { $group: {
+		_id: "$LastQuoteDate"
+		, symbol: {$addToSet: "$symbol"}
+	} }
+*/
+	, {$sort: {"_id":-1} }
+	, {$limit:1}
+/*
+	, {$project: {
+		_id:0
+		, date:"$_id"."$date"
+		, symbol: "$symbol"
+	}}
+*/
+]
+}
+

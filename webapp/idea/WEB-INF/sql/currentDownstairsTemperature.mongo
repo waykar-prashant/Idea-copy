@@ -1,0 +1,20 @@
+{
+	table: "thermostatTmp"
+	, function: "find"
+	, where: [
+		{
+			field: "name"
+			, equal: "Downstairs"
+		}
+               , {
+                        field: "measureTime"
+                        , type: "date"
+                        , equal: "_CURRENT_DATE_"
+                }
+
+	]
+	, select: ["name", "temp", "t_heat", tstate, "deviceTime" ]
+	, sort: [{field: "deviceTime", order: "DESC"}]
+	, limit: 1
+}
+

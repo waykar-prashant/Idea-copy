@@ -1,0 +1,7 @@
+{"url":"jdbc:mysql://10.0.1.19:3306/", "dbName" = "StockEngine", "userName":"StockEngine", "password":"dietcoke"}
+
+select r.screenName, round(avg(s.techScore),0) TECHNICAL, round(avg(s.fundPoints),0) FUNDAMENTAL, ROUND((avg(s.techScore)+avg(s.fundPoints)),0) SCORE from StockEngine.ScreenResult r
+left outer join StockEngine.Score s on s.symbol=r.symbol
+group by r.screenName
+order by ROUND((avg(s.techScore)+avg(s.fundPoints)),0) DESC
+

@@ -1,0 +1,19 @@
+{
+	table: "screenResults"
+	, function: "find"
+	, where: [
+		{
+			field: "date"
+			, type: "date"
+			, equal: "_CURRENT_DATE_"
+		}
+		, {
+			field: "screenName"
+			, equal: "WhippleScreen2"
+		}
+
+	]
+	, select: [ "symbol", "screenName", "date" ]
+	, sort: [{field: "totalScore", order: "DESC"}]
+}
+

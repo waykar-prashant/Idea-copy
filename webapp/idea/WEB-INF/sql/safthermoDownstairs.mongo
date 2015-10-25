@@ -1,0 +1,19 @@
+{
+	table: "thermostat"
+	, function: "find"
+	, where: [
+		{
+			field: "name"
+			, equal: "Downstairs"
+		}
+               , {
+                        field: "currentDay"
+                        , type: "date"
+                        , equal: "_CURRENT_DATE_"
+                }
+
+	]
+	, select: ["name", "temp", "t_heat", tstate, "measureTime" ]
+	, sort: [{field: "measureTime", order: "DESC"}]
+}
+

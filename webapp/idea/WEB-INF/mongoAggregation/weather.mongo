@@ -1,0 +1,21 @@
+
+{
+collection: 'weather'
+, query: [
+	{ $match: {
+		weatherLocationName:"$_LOCATION_$"
+	} }, 
+	{$sort: {lastUpdated:-1} }
+	, {$limit:1}
+	, {$project: {
+		_id:0
+		, weatherLocationName:1
+		, hourly: 1
+               	, currently:1
+		, alerts: 1
+		, lastUpdated:1
+	}}
+
+]
+}
+

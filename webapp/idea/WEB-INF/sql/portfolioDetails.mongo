@@ -1,0 +1,14 @@
+{
+	table: "portfolioHoldings"
+	, function: "find"
+	, where: [
+		{
+			field: "owner"
+			, equal: "markw"
+		}
+	]
+	, select: [ "portfolioName", "symbol", "quantity", "purchasePrice", "purchaseDate", "cost", "sellDate", "sellPrice", "lastTrade", "gain", "percent_gain", "potential", "percent_potential" , "todayGain", "todayPercentGain", "lastUpdated"]
+	, sort: [{field: "portfolioName", order: "ASC"}, {field: "symbol", order: "ASC"}]
+}
+
+

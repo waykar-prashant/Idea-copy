@@ -1,0 +1,17 @@
+{
+	table: "quote"
+	, function: "find"
+	, where: [
+		{
+			field: "symbol"
+			, equal: "$SYMBOL$"
+		}
+
+	]
+	, select: [ "Name", "LastTrade", "Change", "PercentChange", "BookValue", "DividendPerShare", "DividendYield", "EPS", "EPSCurrentYr", "EPSNextYr", "EPSNextQtr", "AvgDailyVolume", "DaysLow", "DaysHigh", "52WeekLow", "52WeekHigh", "MktCap", "Changefrom52WkLow", "PctChangefrom52WkLow", "Changefrom52WkHigh", "PctChangefrom52WkHigh", "Changefrom200DayMvAvg", "PctChangefrom200DayMvAvg", "Changefrom50DayMvAvg", "PctChangefrom50DayMvAvg", "PricePerSales", "PricePerBook", "PERatio", "PEGRatio", "ShortRatio", "TargetPrice1Yr", "Volume", "HoldingsValue", "StockExchange", "LastQuoteDate"
+		]
+
+	, sort: [{field: "deviceTime", order: "DESC"}]
+}
+
+

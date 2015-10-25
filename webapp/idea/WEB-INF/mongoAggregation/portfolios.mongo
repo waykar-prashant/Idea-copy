@@ -1,0 +1,45 @@
+//{ "_id" : ObjectId("54dea5fedba6fa0470f7e7db"), "cost" : 5018.04, "gain" : 0, "lastTrade" : 22.95, "lastUpdated" : ISODate("2015-06-24T22:02:29.159Z"), "owner" : "markw", "percent_gain" : 0, "percent_potential" : 20.28301886792452, "portfolioName" : "Top 10 - Feb 2015", "potential" : 1017.8099999999995, "purchaseDate" : ISODate("2015-02-13T07:00:00Z"), "purchasePrice" : 19.08, "quantity" : 263, "symbol" : "WETF", "todayGain" : 28.93, "todayPercentGain" : 0.48 }
+
+{
+collection: 'portfolioHoldings'
+, query: [
+	{ $match: {
+		owner:"$_OWNER_$"
+		,lastTrade:{$ne:-999}
+	} }
+        , { $group: {
+                _id: {portfolioName:"$portfolioName"}
+                , totalTodayGain: {$sum:"$todayGain"}
+                , totalCost: {$sum:"$cost"}
+                , totalValue: {$sum:{"$multiply":["$lastTrade","$quantity"]} }
+		, realizedGain: {$sum:"$gain"}
+        } }
+	, {$sort: {portfolioName:1, symbol:-1} }
+	, {$project: {
+		_id:1
+               	, cost:1
+		, totalCost:1
+		, totalValue:1
+		, potentialGain: {$subtract: ["$totalValue","$totalCost"] }
+		, totalTodayGain:1
+		, realizedGain: 1
+	}}
+	, {$project: {
+		_id:0
+		, portfolioName: "$_id.portfolioName"
+               	, cost:1
+		, totalTodayGain:1
+		, realizedGain: 1
+               	, percentGain: {$subtract: [
+               				{$multiply:[{$divide: ["$potentialGain","$totalCost"]},100]}
+					, {$mod:[{$multiply:[{$divide: ["$potentialGain","$totalCost"]},100]},1 ] }
+		]}
+               	, totalCost: {$subtract: [ "$totalCost",{$mod:["$totalCost",1]} ] }
+               	, totalValue: {$subtract: [ "$totalValue",{$mod:["$totalValue",1]} ] }
+               	, realizedGain: {$subtract: [ "$realizedGain",{$mod:["$realizedGain",1]} ] }
+               	, potentialGain: {$subtract: [ "$potentialGain",{$mod:["$potentialGain",1]} ] }
+	}}
+
+]
+}
+
