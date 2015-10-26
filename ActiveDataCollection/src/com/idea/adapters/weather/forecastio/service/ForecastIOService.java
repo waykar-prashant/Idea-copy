@@ -53,25 +53,28 @@ public class ForecastIOService {
 		is.close();
 		return writer.toString();
 	}
-	public static String geocodingStringBuilder(String address,String key) throws UnsupportedEncodingException{
+
+	public static String geocodingStringBuilder(String address, String key) throws UnsupportedEncodingException {
 		String responseType = "json";
 		StringBuilder coordinatesUrlString = new StringBuilder(GEOCODING_BASE_URL);
-		coordinatesUrlString.append(responseType).append("?").append("address=").append(java.net.URLEncoder.encode(address,"UTF-8"));
+		coordinatesUrlString.append(responseType).append("?").append("address=")
+				.append(java.net.URLEncoder.encode(address, "UTF-8"));
 		coordinatesUrlString.append(java.net.URLEncoder.encode(key, "UTF-8"));
 		return coordinatesUrlString.toString();
 	}
-	public static Double[] getCoordinates(String address) throws Exception{
+
+	public static Double[] getCoordinates(String address) throws Exception {
 		/*
 		 * Sample Url
 		 * https://maps.googleapis.com/maps/api/geocode/json?address=1600+
 		 * Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
-		 */	
+		 */
 		Double[] coord = new Double[2];
 		GeoApiContext context = new GeoApiContext().setApiKey(GEOCODING_API_KEY);
-		GeocodingResult[] results =  GeocodingApi.geocode(context,address).await();
-		coord[0]= results[0].geometry.location.lat;
-		coord[1]= results[0].geometry.location.lng;
-		
+		GeocodingResult[] results = GeocodingApi.geocode(context, address).await();
+		coord[0] = results[0].geometry.location.lat;
+		coord[1] = results[0].geometry.location.lng;
+
 		return coord;
 	}
 
