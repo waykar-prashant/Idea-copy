@@ -18,13 +18,13 @@ import com.google.maps.model.GeocodingResult;
 
 public class ForecastIOService {
 
-	public static final String FORECASTIO_API_KEY = "338ca7cbf5989fdad923f81b998255d3";
-	public static final String GEOCODING_API_KEY = "AIzaSyBZknovrESFLOUBTgk_PBkvtvHp_T-QVLM";
-	public static final String FORECASTIO_BASE_URL = "https://api.forecast.io/forecast/";
-	public static final String GEOCODING_BASE_URL = "https://maps.googleapis.com/maps/api/geocode/";
-	public static final String REQUEST_TYPE = "GET";
+	public  final String FORECASTIO_API_KEY = "338ca7cbf5989fdad923f81b998255d3";
+	public  final String GEOCODING_API_KEY = "AIzaSyBZknovrESFLOUBTgk_PBkvtvHp_T-QVLM";
+	public  final String FORECASTIO_BASE_URL = "https://api.forecast.io/forecast/";
+	public  final String GEOCODING_BASE_URL = "https://maps.googleapis.com/maps/api/geocode/";
+	public  final String REQUEST_TYPE = "GET";
 
-	protected static String urlStringBuilder(double latitude, double longitude) {
+	protected  String urlStringBuilder(double latitude, double longitude) {
 		/*
 		 * Sample url
 		 * https://api.forecast.io/forecast/338ca7cbf5989fdad923f81b998255d3/37.
@@ -36,12 +36,12 @@ public class ForecastIOService {
 
 	}
 
-	protected static HttpURLConnection connectionBuilder(String urlString) throws IOException {
+	protected  HttpURLConnection connectionBuilder(String urlString) throws IOException {
 		URL url = new URL(urlString);
 		return (HttpURLConnection) url.openConnection();
 	}
 
-	protected static String getRequestedCode(HttpURLConnection con) throws IOException {
+	protected  String getRequestedCode(HttpURLConnection con) throws IOException {
 		InputStream is = con.getInputStream();
 		BufferedReader urlReader = new BufferedReader(new InputStreamReader(is));
 		StringWriter writer = new StringWriter();
@@ -54,7 +54,7 @@ public class ForecastIOService {
 		return writer.toString();
 	}
 
-	public static String geocodingStringBuilder(String address, String key) throws UnsupportedEncodingException {
+	protected  String geocodingStringBuilder(String address, String key) throws UnsupportedEncodingException {
 		String responseType = "json";
 		StringBuilder coordinatesUrlString = new StringBuilder(GEOCODING_BASE_URL);
 		coordinatesUrlString.append(responseType).append("?").append("address=")
@@ -63,7 +63,7 @@ public class ForecastIOService {
 		return coordinatesUrlString.toString();
 	}
 
-	public static Double[] getCoordinates(String address) throws Exception {
+	public Double[] getCoordinates(String address) throws Exception {
 		/*
 		 * Sample Url
 		 * https://maps.googleapis.com/maps/api/geocode/json?address=1600+
@@ -77,11 +77,16 @@ public class ForecastIOService {
 
 		return coord;
 	}
+	
+	public String weatherForecast(String address) throws Exception{
+		Double[] coord = getCoordinates(address);
+		return getRequestedCode(connectionBuilder(urlStringBuilder(coord[0], coord[1])));
+	}
 
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		String address = "1600 Amphitheatre Parkway, Mountain View, CA";
 		Double[] coord = getCoordinates(address);
 		String Response = getRequestedCode(connectionBuilder(urlStringBuilder(coord[0], coord[1])));
 		System.out.println(Response);
-	}
+	}*/
 }
