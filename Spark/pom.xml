@@ -14,55 +14,38 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+     
+     <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-assembly-plugin</artifactId>
+  <configuration>
+    <archive>
+      <manifest>
+        <mainClass>org.idea.streaming.example.KafkaWordCount</mainClass>
+      </manifest>
+    </archive>
+  </configuration>
+</plugin>
+    
     </plugins>
   </build>
   <dependencies>
-  		<dependency>
-			<groupId>com.liferay.portal</groupId>
-			<artifactId>util-java</artifactId>
-			<version>6.2.3</version>
-		</dependency>
-  		
-		<dependency>
-		    <groupId>org.apache.spark</groupId>
-		    <artifactId>spark-streaming-kafka_2.10</artifactId>
-		    <version>1.5.1</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.spark</groupId>
-		    <artifactId>spark-streaming_2.10</artifactId>
-		    <version>1.5.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.kafka</groupId>
-			<artifactId>kafka_2.8.0</artifactId>
-			<version>0.8.0</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-			<exclusions>
-			    <exclusion>
-			        <groupId>com.sun.jmx</groupId>
-			        <artifactId>jmxri</artifactId>
-			    </exclusion>
-			    <exclusion>
-			        <groupId>com.sun.jdmk</groupId>
-			        <artifactId>jmxtools</artifactId>
-			    </exclusion>
-			    <exclusion>
-			            <groupId>javax.jms</groupId>
-			            <artifactId>jms</artifactId>
-			    </exclusion>
-			</exclusions>
+  				<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_2.10</artifactId>
+			<version>1.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.spark</groupId>
-			<artifactId>spark-examples_2.10</artifactId>
-			<version>0.9.0-incubating</version>
+			<artifactId>spark-streaming_2.10</artifactId>
+			<version>1.5.1</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-streaming-kafka_2.10</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+
 		<!-- <dependency>
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
