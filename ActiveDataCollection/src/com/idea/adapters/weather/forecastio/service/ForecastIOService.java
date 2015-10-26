@@ -80,6 +80,7 @@ public class ForecastIOService {
 	
 	public String weatherForecast(String address) throws Exception{
 		Double[] coord = getCoordinates(address);
+		System.out.println("hello");
 		return getRequestedCode(connectionBuilder(urlStringBuilder(coord[0], coord[1])));
 	}
 
